@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Assignments from "../Pages/Assignments/Assignments";
 import Pending from "../Pages/Pending/Pending";
+import CreateAssignment from "../Pages/CreateAssignment/CreateAssignment";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "/create",
+        element: <CreateAssignment />,
       },
     ],
   },

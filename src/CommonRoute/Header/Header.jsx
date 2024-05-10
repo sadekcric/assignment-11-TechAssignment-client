@@ -53,6 +53,17 @@ const Header = () => {
         <>
           <li>
             <NavLink
+              to="/create"
+              className={({ isActive }) =>
+                isActive ? "bg-blue-900 px-6 py-2 rounded-md shadow-lg" : "bg-blue-400 px-4 py-2 rounded-md shadow-lg"
+              }
+            >
+              Create Assignment
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
               to="/login"
               className={({ isActive }) =>
                 isActive ? "bg-blue-900 px-6 py-2 rounded-md shadow-lg" : "bg-blue-400 px-4 py-2 rounded-md shadow-lg"

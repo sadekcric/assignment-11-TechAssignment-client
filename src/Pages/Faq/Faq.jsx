@@ -1,4 +1,4 @@
-import faq from "../../assets/faq.webp";
+import faq from "../../assets/faq.jpg";
 
 const Faq = () => {
   return (
@@ -13,12 +13,12 @@ const Faq = () => {
       </div>
 
       <div className="dark:bg-gray-100 dark:text-gray-800 ">
-        <div className="container flex flex-col mx-auto rounded-xl lg:items-center p-3 bg-blue-950 lg:px-6 lg:py-12 lg:flex-row">
-          <div className="flex flex-col px-6 py-8 space-y-6 rounded-sm sm:p-8 lg:p-12 lg:w-1/2  dark:bg-violet-600 dark:text-gray-50">
-            <img src={faq} alt="" className="rounded-lg  dark:bg-gray-500 aspect-video w-full sm:min-h-full" />
+        <div className="container flex flex-col mx-auto rounded-xl lg:items-center p-3 gap-5  bg-blue-950 lg:px-6 lg:py-12 lg:flex-row">
+          <div className="lg:flex-1 h-full">
+            <img src={faq} alt="" className="rounded-lg  dark:bg-gray-500 aspect-video w-full h-[492px]" />
           </div>
 
-          <div className="lg:w-1/2 xl:w-3/5 dark:bg-gray-100">
+          <div className="lg:w-1/2 lg:flex-1 xl:w-3/5 dark:bg-gray-100">
             <div className="space-y-5 text-white">
               <div className="collapse bg-violet-400  collapse-arrow bg-base-200">
                 <input type="radio" name="my-accordion-2" defaultChecked />
