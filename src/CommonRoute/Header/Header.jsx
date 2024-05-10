@@ -5,7 +5,7 @@ import useAuth from "./../../Hooks/useAuth";
 import { useState } from "react";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [menu, setMenu] = useState(false);
 
   const navLink = (
@@ -46,7 +46,7 @@ const Header = () => {
       {user ? (
         <>
           <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
-            <button> Log Out</button>
+            <button onClick={() => logout()}> Log Out</button>
           </li>
         </>
       ) : (

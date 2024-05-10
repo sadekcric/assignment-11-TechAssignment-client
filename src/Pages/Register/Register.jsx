@@ -1,8 +1,95 @@
 import { MdOutlineMailOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IoMdPhotos } from "react-icons/io";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  const [visible1, setVisible1] = useState(false);
+  const [visible2, setVisible2] = useState(false);
+  const { register, logout } = useAuth();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+    const conformPassword = form.conformPassword.value;
+
+    if (password !== conformPassword) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Opps! Password not match",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+
+    if (password.length < 6) {
+      return Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Opps! Password must be 6 digits or longer!",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+
+    if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+      // return toast.error("Password must be a Uppercase & Lowercase!");
+
+      return Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Password must be a Uppercase & Lowercase!",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+
+    register(email, password)
+      .then(({ user }) => {
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Registration Successful!",
+              showConfirmButton: false,
+              timer: 3000,
+            });
+
+            return logout();
+          })
+          .catch((err) => {
+            return Swal.fire({
+              icon: "error",
+              title: "Error!",
+              text: err.message,
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          });
+      })
+      .catch((err) => {
+        return Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: err.message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      });
+  };
   return (
     <div className="container mx-auto mt-5 font-semibold">
       <div className="font-[sans-serif] bg-white text-white md:min-h-screen ">
@@ -16,7 +103,7 @@ const Register = () => {
           </div>
 
           <div className="flex items-center md:p-8 p-6 h-full lg:w-11/12 lg:ml-auto">
-            <form className="max-w-lg w-full mx-auto text-black">
+            <form onSubmit={handleRegister} className="max-w-lg w-full mx-auto text-black">
               <div className="mb-10">
                 <h3 className="text-3xl font-extrabold ">Create an account</h3>
                 <p className="text-sm mt-2">
@@ -58,7 +145,7 @@ const Register = () => {
                 <div className="relative flex items-center">
                   <input
                     name="email"
-                    type="text"
+                    type="email"
                     required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                     placeholder="Enter email"
@@ -87,23 +174,18 @@ const Register = () => {
                   <div className="relative flex items-center">
                     <input
                       name="password"
-                      type="password"
+                      type={visible1 ? "text" : "password"}
                       required
                       className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                       placeholder="Enter password"
                     />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#bbb"
-                      stroke="#bbb"
-                      className="w-[18px] h-[18px] absolute right-2 cursor-pointer"
-                      viewBox="0 0 128 128"
-                    >
-                      <path
-                        d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
-                        data-original="#000000"
-                      ></path>
-                    </svg>
+                    <div className="absolute right-3">
+                      {visible1 ? (
+                        <FaRegEye className="text-lg text-gray-400" onClick={() => setVisible1(!visible1)} />
+                      ) : (
+                        <FaRegEyeSlash className="text-lg text-gray-400" onClick={() => setVisible1(!visible1)} />
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -112,44 +194,35 @@ const Register = () => {
                   <div className="relative flex items-center">
                     <input
                       name="conformPassword"
-                      type="password"
+                      type={visible2 ? "text" : "password"}
                       required
                       className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                       placeholder="Enter conform password"
                     />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#bbb"
-                      stroke="#bbb"
-                      className="w-[18px] h-[18px] absolute right-2 cursor-pointer"
-                      viewBox="0 0 128 128"
-                    >
-                      <path
-                        d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
-                        data-original="#000000"
-                      ></path>
-                    </svg>
+                    <div className="absolute right-3">
+                      {visible2 ? (
+                        <FaRegEye className="text-lg text-gray-400" onClick={() => setVisible2(!visible2)} />
+                      ) : (
+                        <FaRegEyeSlash className="text-lg text-gray-400" onClick={() => setVisible2(!visible2)} />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center mt-8">
-                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 rounded" />
+                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 rounded" required />
                 <label className="ml-3 block text-sm">
-                  I accept the{" "}
-                  <a href="" className="text-blue-500 font-semibold hover:underline ml-1">
-                    Terms and Conditions
-                  </a>
+                  I accept the <Link className="text-blue-500 font-semibold hover:underline ml-1">Terms and Conditions</Link>
                 </label>
               </div>
 
               <div className="mt-12">
-                <button
-                  type="button"
+                <input
+                  type="submit"
+                  value="Register"
                   className="w-full  shadow-xl py-2.5 px-8 text-sm font-semibold rounded-full bg-transparent text-blue-500 border border-blue-400 focus:outline-none"
-                >
-                  Register
-                </button>
+                />
               </div>
             </form>
           </div>
