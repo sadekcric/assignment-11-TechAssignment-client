@@ -3,6 +3,8 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import Assignments from "../Pages/Assignments/Assignments";
+import Pending from "../Pages/Pending/Pending";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/assignments",
+        element: <Assignments />,
+      },
+      {
+        path: "/pending",
+        element: <Pending />,
       },
 
       {

@@ -1,7 +1,13 @@
+import Faq from "../Faq/Faq";
+import Banner from "./Banner/Banner";
+import Features from "./Features/Features";
+
 const Home = () => {
   return (
     <div>
-      <h1>This is Home Pages</h1>
+      <Banner />
+      <Features />
+      <Faq />
     </div>
   );
 };
