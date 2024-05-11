@@ -14,9 +14,8 @@ const Assignments = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [level, setLevel] = useState("");
   const totalPages = Math.ceil(totalItems / perPageItems);
-  console.log(totalItems);
+
   const pages = [...Array(totalPages).keys()];
-  console.log(pages);
 
   const handlePages = (e) => {
     const pagesInt = parseInt(e.target.value);
@@ -48,28 +47,6 @@ const Assignments = () => {
     });
   }, [pageNumber, perPageItems, level]);
 
-  // console.log(data.length);
-
-  // const handleEasy = () => {
-  //   // axios
-  //   //   .get(`http://localhost:5000/assignments/easy?pages=${pageNumber}&size=${perPageItems}`)
-  //   //   .then((res) => setData(res.data))
-  //   //   .catch((err) => console.log(err.message));
-  // };
-
-  // const { isPending, error, data } = useQuery({
-  //   queryKey: ["assignments"],
-  //   queryFn: () => axios.get(`http://localhost:5000/assignments?pages=${pageNumber}&size=${perPageItems}`).then((res) => res.data),
-  // });
-
-  // if (isPending) {
-  //   return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
-  // }
-
-  // console.log(data);
-
-  // if (error) return "An error has occurred: " + error.message;
-
   return (
     <div className="mt-10 ">
       <div className="mb-10">
@@ -81,50 +58,13 @@ const Assignments = () => {
         </p>
       </div>
 
-      {/* <div>
-        <div className="text-center relative">
-          <button
-            onClick={() => setActive(!active)}
-            className="py-3  px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-900 transition font-semibold"
-          >
-            <span className="flex items-center gap-3">
-              <span>Assignment Difficulty Level</span>
-              <span>
-                <FaChevronDown />
-              </span>
-            </span>
-          </button>
-
-          <ul
-            className={`bg-blue-600 bg-opacity-30   rounded-lg border-2 border-blue-600 max-w-[270px] mx-auto transition duration-1000 ease-in-out ${
-              active ? "translate-y-0 opacity-100" : "translate-y-80 opacity-0 -z-10"
-            }`}
-          >
-            <li className="border-b-2 border-blue-600">
-              <button className="py-2 w-full font-semibold">All</button>
-            </li>
-            <li className="border-b-2 border-blue-600">
-              <button onClick={handleEasy} className="py-2 w-full font-semibold">
-                Easy
-              </button>
-            </li>
-            <li className="border-b-2 border-blue-600">
-              <button className="py-2 w-full font-semibold">Medium</button>
-            </li>
-            <li>
-              <button className="py-2 w-full font-semibold">Hard</button>
-            </li>
-          </ul>
-        </div>
-      </div> */}
-
       <div className="text-center">
         <select
           onChange={(e) => setLevel(e.target.value)}
           value={level}
           className="py-3  px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-900 transition font-semibold"
         >
-          <option>Difficulty Level</option>
+          <option value="">Difficulty Level</option>
           <option value="Easy">Easy</option>
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
