@@ -3,10 +3,12 @@ import { FaBook } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "./../../Hooks/useAuth";
 import { useState } from "react";
+import fakeuser from "../../assets/fateuser.png";
 
 const Header = () => {
   const { user, logout } = useAuth();
   const [menu, setMenu] = useState(false);
+  const [profile, setProfile] = useState(false);
 
   const navLink = (
     <>
@@ -45,12 +47,6 @@ const Header = () => {
 
       {user ? (
         <>
-          <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
-            <button onClick={() => logout()}> Log Out</button>
-          </li>
-        </>
-      ) : (
-        <>
           <li>
             <NavLink
               to="/create"
@@ -62,6 +58,12 @@ const Header = () => {
             </NavLink>
           </li>
 
+          <li onClick={() => setProfile(!profile)} className="w-12 h-12 rounded-full hidden lg:flex">
+            <img src={user?.photoURL || fakeuser} alt="" className="w-full h-full rounded-full" />
+          </li>
+        </>
+      ) : (
+        <>
           <li>
             <NavLink
               to="/login"
@@ -89,7 +91,7 @@ const Header = () => {
   );
   return (
     <div>
-      <nav className="bg-blue-500 relative  lg:static text-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-blue-500 relative z-50 lg:static text-white border-gray-200 dark:bg-gray-900">
         <div className="container flex flex-wrap items-center justify-between mx-auto p-4 ">
           <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <FaBook className="text-red-300 text-2xl" />
@@ -119,6 +121,31 @@ const Header = () => {
             <ul className="flex flex-col gap-5  items-end">{navLink}</ul>
           </div>
           {/* Mobile menu end */}
+
+          {/* Profile start*/}
+
+          <ul
+            className={`${
+              profile ? "translate-y-2 opacity-100" : "-translate-y-60 opacity-0"
+            } transition duration-1000 ease-in-out absolute right-[10%] top-16 z-30 bg-blue-500 bg-opacity-50  px-10 py-5 rounded-b-xl flex flex-col gap-5  items-end`}
+          >
+            <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
+              <button> My Assignment</button>
+            </li>
+            <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
+              <button
+                onClick={() => {
+                  logout();
+                  setProfile(false);
+                }}
+              >
+                {" "}
+                Log Out
+              </button>
+            </li>
+          </ul>
+
+          {/* Profile End */}
 
           <div className="hidden w-full lg:block lg:w-auto" id="navbar-default">
             <ul className="flex items-center font-semibold gap-3">{navLink}</ul>

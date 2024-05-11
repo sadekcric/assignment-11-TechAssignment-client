@@ -1,5 +1,31 @@
+import { useState } from "react";
 import create from "../../assets/create.jpg";
+import DatePicker from "react-datepicker";
+import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "./../../Hooks/useAuth";
+
 const CreateAssignment = () => {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const { user } = useAuth();
+
+  const handleCreateAssignment = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const marks = form.marks.value;
+    const dueDate = selectedDate;
+    const level = form.level.value;
+    const thumbnail = form.thumbnail.value;
+    const publisher = { email: user.email, name: user.displayName, photo: user?.photoURL };
+
+    const assignment = { title, marks, dueDate, level, thumbnail, publisher };
+
+    axios.post(`http://localhost:5000/assignments`, assignment).then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <div className="container mx-auto p-3 font-semibold min-h-[calc(100vh-337px)] lg:flex lg:flex-col lg:items-center lg:justify-center my-10 ">
       <div className="mb-10">
@@ -10,7 +36,7 @@ const CreateAssignment = () => {
         <div className="flex-1 h-full ">
           <img src={create} alt="" className="w-full lg:h-[436px] rounded-lg" />
         </div>
-        <form className="flex-1 h-full">
+        <form onSubmit={handleCreateAssignment} className="flex-1 h-full">
           <fieldset className=" bg-blue-100 h-full gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
               <div className="col-span-full sm:col-span-3">
@@ -62,16 +88,15 @@ const CreateAssignment = () => {
                 </select>
               </div>
 
-              <div className="col-span-full sm:col-span-3">
-                <label htmlFor="data" className="text-sm">
-                  Due Date
-                </label>
-                <input
-                  id="data"
-                  name="data"
-                  type="date"
-                  placeholder="Due Date"
-                  className="w-full rounded-md pl-2 py-2 lg:px-4 focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+              <div className="col-span-full  sm:col-span-3 mt-1">
+                <p className="text-sm">Due Date</p>
+
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  dateFormat={"dd/MM/yyyy"}
+                  minDate={new Date()}
+                  className="w-full inline-block rounded-md pl-2 py-2 lg:px-4 focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />
               </div>
 
@@ -82,7 +107,7 @@ const CreateAssignment = () => {
                 <input
                   id="thumbnail"
                   name="thumbnail"
-                  type="text"
+                  type="link"
                   placeholder="Thumbnail URL"
                   className="w-full rounded-md pl-2 py-2 lg:px-4 focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />

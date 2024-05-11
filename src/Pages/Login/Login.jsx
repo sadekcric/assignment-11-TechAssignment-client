@@ -1,11 +1,17 @@
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "./../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaGithub } from "react-icons/fa";
 
 const Login = () => {
-  const { googleLogin, githubLogin, login } = useAuth();
+  const { googleLogin, githubLogin, login, loading, setLoading } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
+  }
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -16,8 +22,11 @@ const Login = () => {
           showConfirmButton: false,
           timer: 3000,
         });
+
+        location?.state ? navigate(location.state) : navigate("/");
       })
       .catch(() => {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Opps! Something Wrong",
@@ -36,8 +45,11 @@ const Login = () => {
           showConfirmButton: false,
           timer: 3000,
         });
+
+        location?.state ? navigate(location.state) : navigate("/");
       })
       .catch(() => {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: "Opps! Something Wrong",
@@ -61,8 +73,11 @@ const Login = () => {
           showConfirmButton: false,
           timer: 3000,
         });
+
+        location?.state ? navigate(location.state) : navigate("/");
       })
       .catch((err) => {
+        setLoading(false);
         Swal.fire({
           icon: "error",
           title: err.message,

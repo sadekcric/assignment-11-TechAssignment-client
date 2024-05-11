@@ -1,5 +1,5 @@
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdPhotos } from "react-icons/io";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
@@ -10,7 +10,12 @@ import { updateProfile } from "firebase/auth";
 const Register = () => {
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
-  const { register, logout } = useAuth();
+  const { register, logout, loading, setLoading } = useAuth();
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
+  }
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -68,9 +73,11 @@ const Register = () => {
               timer: 3000,
             });
 
-            return logout();
+            logout();
+            return navigate("/login");
           })
           .catch((err) => {
+            setLoading(false);
             return Swal.fire({
               icon: "error",
               title: "Error!",
@@ -81,6 +88,7 @@ const Register = () => {
           });
       })
       .catch((err) => {
+        setLoading(false);
         return Swal.fire({
           icon: "error",
           title: "Error!",
@@ -160,7 +168,6 @@ const Register = () => {
                   <input
                     name="photo"
                     type="link"
-                    required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-blue-500 px-2 py-3 outline-none"
                     placeholder="Enter Photo URL"
                   />

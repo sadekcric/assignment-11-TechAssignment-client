@@ -6,6 +6,7 @@ import Register from "../Pages/Register/Register";
 import Assignments from "../Pages/Assignments/Assignments";
 import Pending from "../Pages/Pending/Pending";
 import CreateAssignment from "../Pages/CreateAssignment/CreateAssignment";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/assignments",
         element: <Assignments />,
+        loader: () => fetch(`http://localhost:5000/count`),
       },
       {
         path: "/pending",
@@ -35,7 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/create",
-        element: <CreateAssignment />,
+        element: (
+          <PrivateRoute>
+            <CreateAssignment />
+          </PrivateRoute>
+        ),
       },
     ],
   },
