@@ -8,6 +8,7 @@ import Pending from "../Pages/Pending/Pending";
 import CreateAssignment from "../Pages/CreateAssignment/CreateAssignment";
 import PrivateRoute from "./PrivateRoute";
 import Update from "../Pages/Update/Update";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,15 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Update />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) => fetch(`https://assignment-server-teal.vercel.app/assignments/${params.id}`),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <ViewDetails />
           </PrivateRoute>
         ),
         loader: ({ params }) => fetch(`https://assignment-server-teal.vercel.app/assignments/${params.id}`),

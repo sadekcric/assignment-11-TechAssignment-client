@@ -18,7 +18,7 @@ const Cart = ({ assignment, handleDelete }) => {
           <img alt="" src={publisher?.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-semibold">{publisher.name}</p>
-            <p className="text-sm font-semibold">DeadLine: {deadLine} </p>
+            <p className="text-sm font-semibold text-red-500">DeadLine: {deadLine} </p>
           </div>
         </div>
 
@@ -51,11 +51,12 @@ const Cart = ({ assignment, handleDelete }) => {
           <p className="py-2 px-6 rounded-full bg-yellow-100 text-yellow-500 font-bold">Marks: {marks}</p>
           <p className="py-2 px-6 rounded-full bg-green-100 text-green-500 font-bold">Difficulty Level: {level}</p>
         </div>
-        <div>
+
+        <Link to={`/details/${_id}`}>
           <button className="py-3 w-full bg-blue-500 rounded-lg shadow-md font-semibold text-white text-center mt-5">
             View Assignment
           </button>
-        </div>
+        </Link>
       </div>
     </div>
   );
