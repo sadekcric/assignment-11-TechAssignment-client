@@ -1,18 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+// import { FaChevronDown } from "react-icons/fa";
 import Cart from "./Cart";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 
 const Assignments = () => {
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const [data, setData] = useState([]);
-  const { totalItems } = useLoaderData();
+  // const { totalItems } = useLoaderData();
+  const [totalItems, setTotalItems] = useState(0);
   const [perPageItems, setPerPageItems] = useState(6);
   const [pageNumber, setPageNumber] = useState(0);
+  const [level, setLevel] = useState("");
   const totalPages = Math.ceil(totalItems / perPageItems);
+  console.log(totalItems);
   const pages = [...Array(totalPages).keys()];
+  console.log(pages);
 
   const handlePages = (e) => {
     const pagesInt = parseInt(e.target.value);
@@ -33,8 +37,25 @@ const Assignments = () => {
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/assignments?pages=${pageNumber}&size=${perPageItems}`).then((res) => setData(res.data));
-  }, [pageNumber, perPageItems]);
+    axios.get(`http://localhost:5000/count?level=${level}`).then((res) => {
+      setTotalItems(res.data.totalItems);
+    });
+  }, [level]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/assignments?pages=${pageNumber}&size=${perPageItems}&level=${level}`).then((res) => {
+      setData(res.data);
+    });
+  }, [pageNumber, perPageItems, level]);
+
+  // console.log(data.length);
+
+  // const handleEasy = () => {
+  //   // axios
+  //   //   .get(`http://localhost:5000/assignments/easy?pages=${pageNumber}&size=${perPageItems}`)
+  //   //   .then((res) => setData(res.data))
+  //   //   .catch((err) => console.log(err.message));
+  // };
 
   // const { isPending, error, data } = useQuery({
   //   queryKey: ["assignments"],
@@ -60,7 +81,7 @@ const Assignments = () => {
         </p>
       </div>
 
-      <div>
+      {/* <div>
         <div className="text-center relative">
           <button
             onClick={() => setActive(!active)}
@@ -83,7 +104,9 @@ const Assignments = () => {
               <button className="py-2 w-full font-semibold">All</button>
             </li>
             <li className="border-b-2 border-blue-600">
-              <button className="py-2 w-full font-semibold">Easy</button>
+              <button onClick={handleEasy} className="py-2 w-full font-semibold">
+                Easy
+              </button>
             </li>
             <li className="border-b-2 border-blue-600">
               <button className="py-2 w-full font-semibold">Medium</button>
@@ -93,13 +116,22 @@ const Assignments = () => {
             </li>
           </ul>
         </div>
+      </div> */}
+
+      <div className="text-center">
+        <select
+          onChange={(e) => setLevel(e.target.value)}
+          value={level}
+          className="py-3  px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-900 transition font-semibold"
+        >
+          <option>Difficulty Level</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
       </div>
 
-      <div
-        className={`grid grid-cols-1 transition duration-1000 ease-in-out md:grid-cols-2 lg:grid-cols-3 container mx-auto p-3 gap-5 ${
-          active ? "translate-y-5" : "-translate-y-24"
-        }`}
-      >
+      <div className={`grid grid-cols-1 transition duration-1000 ease-in-out md:grid-cols-2 lg:grid-cols-3 container mx-auto p-3 gap-5`}>
         {data.map((assignment) => (
           <Cart key={assignment._id} assignment={assignment} />
         ))}
