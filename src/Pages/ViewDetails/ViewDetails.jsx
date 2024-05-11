@@ -112,6 +112,7 @@ const ViewDetails = () => {
                 >
                   Take assignment
                 </button>
+
                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                   <div className="modal-box relative">
                     <h3 className="font-bold text-lg text-center">Submit Form</h3>

@@ -1,143 +1,49 @@
+import { useLoaderData } from "react-router-dom";
+import PendingCart from "./PendingCart";
+import { useEffect, useState } from "react";
+
 const Pending = () => {
+  const items = useLoaderData();
+
+  const [submittedAssignments, setSubmittedAssignment] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // console.log(assignment);
+
+  useEffect(() => {
+    setSubmittedAssignment(items);
+  }, [items]);
+
+  if (loading) {
+    return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
+  }
+
   return (
-    <div>
-      <div className="overflow-x-auto">
-        <table className="table">
+    <div className="container mx-auto p-3">
+      <div className="overflow-x-auto ">
+        <table className="table ">
           {/* head */}
           <thead>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+            <tr className="text-sm font-semibold w-full">
+              <th>SL</th>
+              <th>Examinee</th>
+              <th>Title</th>
+              <th>Marks</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Zemlak, Daniel and Leannon
-                <br />
-                <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-              </td>
-              <td>Purple</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src="https://img.daisyui.com/tailwind-css-component-profile-3@56w.png" alt="Avatar Tailwind CSS Component" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Brice Swyre</div>
-                    <div className="text-sm opacity-50">China</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Carroll Group
-                <br />
-                <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-              </td>
-              <td>Red</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 3 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src="https://img.daisyui.com/tailwind-css-component-profile-4@56w.png" alt="Avatar Tailwind CSS Component" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Marjy Ferencz</div>
-                    <div className="text-sm opacity-50">Russia</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Rowe-Schoen
-                <br />
-                <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-              </td>
-              <td>Crimson</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
-            {/* row 4 */}
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src="https://img.daisyui.com/tailwind-css-component-profile-5@56w.png" alt="Avatar Tailwind CSS Component" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Yancy Tear</div>
-                    <div className="text-sm opacity-50">Brazil</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Wyman-Ledner
-                <br />
-                <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-              </td>
-              <td>Indigo</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
-              </th>
-            </tr>
+            {submittedAssignments.map((assignment, index) => (
+              <PendingCart
+                key={assignment._id}
+                assignment={assignment}
+                index={index}
+                setSubmittedAssignment={setSubmittedAssignment}
+                submittedAssignments={submittedAssignments}
+                setLoading={setLoading}
+              />
+            ))}
           </tbody>
         </table>
       </div>
