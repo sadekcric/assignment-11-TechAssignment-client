@@ -3,6 +3,7 @@ import moment from "moment";
 import { MdDeleteForever } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
+import { Link } from "react-router-dom";
 
 const Cart = ({ assignment, handleDelete }) => {
   const { publisher, thumbnail, title, marks, level, dueDate, _id } = assignment;
@@ -31,14 +32,15 @@ const Cart = ({ assignment, handleDelete }) => {
             <MdDeleteForever className="text-xl text-red-500" />
             <Tooltip id="delete" />
           </button>
-          <button
+          <Link
+            to={`/update/${_id}`}
             className="w-10 h-10 cursor-pointer rounded-full bg-green-100 border border-green-500 flex items-center justify-center"
             data-tooltip-id="edit"
             data-tooltip-content="Edit"
           >
             <FiEdit3 className="text-lg text-green-500" title="Edit" />
             <Tooltip id="edit" />
-          </button>
+          </Link>
         </div>
       </div>
       <div>
@@ -64,4 +66,5 @@ export default Cart;
 Cart.propTypes = {
   assignment: PropTypes.object,
   handleDelete: PropTypes.func,
+  handleUpdate: PropTypes.func,
 };
