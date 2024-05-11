@@ -4,8 +4,8 @@ import { MdDeleteForever } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 
-const Cart = ({ assignment }) => {
-  const { publisher, thumbnail, title, marks, level, dueDate } = assignment;
+const Cart = ({ assignment, handleDelete }) => {
+  const { publisher, thumbnail, title, marks, level, dueDate, _id } = assignment;
 
   const date = moment(dueDate);
   const deadLine = date.format("Do MMMM YYYY");
@@ -22,22 +22,23 @@ const Cart = ({ assignment }) => {
         </div>
 
         <div className="flex flex-row-reverse items-center gap-5">
-          <p
+          <button
+            onClick={() => handleDelete(_id)}
             className="w-10 h-10 cursor-pointer rounded-full bg-red-100 border border-red-500 flex items-center justify-center"
             data-tooltip-id="delete"
             data-tooltip-content="Delete"
           >
             <MdDeleteForever className="text-xl text-red-500" />
             <Tooltip id="delete" />
-          </p>
-          <p
+          </button>
+          <button
             className="w-10 h-10 cursor-pointer rounded-full bg-green-100 border border-green-500 flex items-center justify-center"
             data-tooltip-id="edit"
             data-tooltip-content="Edit"
           >
             <FiEdit3 className="text-lg text-green-500" title="Edit" />
             <Tooltip id="edit" />
-          </p>
+          </button>
         </div>
       </div>
       <div>
@@ -62,4 +63,5 @@ export default Cart;
 
 Cart.propTypes = {
   assignment: PropTypes.object,
+  handleDelete: PropTypes.func,
 };

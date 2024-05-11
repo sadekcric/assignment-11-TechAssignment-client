@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "./../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const CreateAssignment = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -21,9 +22,29 @@ const CreateAssignment = () => {
 
     const assignment = { title, marks, dueDate, level, thumbnail, publisher };
 
-    axios.post(`http://localhost:5000/assignments`, assignment).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post(`https://assignment-server-teal.vercel.app/assignments`, assignment)
+      .then((res) => {
+        if (res.data.acknowledged) {
+          return Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Assignment Created Successfully !",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+        form.reset();
+      })
+      .catch((err) => {
+        return Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      });
   };
 
   return (
