@@ -11,11 +11,16 @@ const Update = () => {
   const data = useLoaderData();
   const { title, thumbnail, description, marks, level, _id, dueDate } = data;
   const [selectedDate, setSelectedDate] = useState(dueDate);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log(data);
+
+  if (loading) {
+    return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
+  }
 
   const handleUpdate = (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const title = form.title.value;
     const marks = form.marks.value;
@@ -29,6 +34,7 @@ const Update = () => {
       .put(`https://assignment-server-teal.vercel.app/update/${_id}`, assignment)
       .then((data) => {
         if (data.data.modifiedCount > 0) {
+          setLoading(false);
           Swal.fire({
             icon: "success",
             title: "Success",
@@ -40,6 +46,7 @@ const Update = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         return Swal.fire({
           icon: "error",
           title: "Error",
@@ -68,6 +75,7 @@ const Update = () => {
                   Title
                 </label>
                 <input
+                  required
                   defaultValue={title}
                   id="title"
                   name="title"
@@ -82,6 +90,7 @@ const Update = () => {
                   Marks
                 </label>
                 <input
+                  required
                   defaultValue={marks}
                   id="marks"
                   name="marks"
@@ -96,6 +105,7 @@ const Update = () => {
                   Difficulty Level
                 </label>
                 <select
+                  required
                   defaultValue={level}
                   id="level"
                   name="level"
@@ -132,6 +142,7 @@ const Update = () => {
                   Thumbnail URL
                 </label>
                 <input
+                  required
                   defaultValue={thumbnail}
                   id="thumbnail"
                   name="thumbnail"
@@ -146,6 +157,7 @@ const Update = () => {
                   Description
                 </label>
                 <textarea
+                  required
                   defaultValue={description}
                   id="description"
                   name="description"

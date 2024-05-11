@@ -2,29 +2,64 @@ import moment from "moment";
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { ImCancelCircle } from "react-icons/im";
+import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ViewDetails = () => {
   const details = useLoaderData();
   const { user } = useAuth();
 
   const { title, description, dueDate, level, marks, publisher, thumbnail } = details;
-
+  const [loading, setLoading] = useState(false);
   const futureDate = moment(dueDate);
   const currentDate = moment();
   const deadLine = futureDate.diff(currentDate, "days");
 
+  if (loading) {
+    return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
+  }
+
   const handleSubmit = (e) => {
+    setLoading(true);
+
     const form = e.target;
     const doc = form.doc.value;
     const note = form.note.value;
     const status = "pending";
+    const obtainedMarks = null;
+    const feedBack = null;
     const examinee = {
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
     };
 
-    const file = { doc, note, status, examinee };
+    const file = { doc, note, status, examinee, title, marks, obtainedMarks, feedBack };
+
+    axios
+      .post(`https://assignment-server-teal.vercel.app/submitted`, file)
+      .then((res) => {
+        if (res.data) {
+          setLoading(false);
+          return Swal.fire({
+            icon: "success",
+            title: "Successful",
+            text: " Successfully Submitted!",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+      })
+      .catch((err) => {
+        return Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      });
 
     console.log(file);
     form.reset();
