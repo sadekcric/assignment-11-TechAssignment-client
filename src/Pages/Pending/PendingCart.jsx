@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 
 const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssignments, setLoading }) => {
-  const { title, examinee, marks, doc, _id } = assignment;
+  const { title, examinee, marks, doc, _id, note } = assignment;
   const { user } = useAuth();
   const verifyUser = user.email;
   const examineeVerify = examinee.email;
@@ -81,9 +81,21 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
           <dialog id="my_modal_4" className="modal ">
             <div className="modal-box w-11/12 max-w-5xl relative">
               <h3 className="font-bold text-lg text-center">Give Mark</h3>
-              <p className="pb-4 pt-2">
-                While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
-              </p>
+
+              <div className="pb-4 pt-2 space-y-2">
+                <p>
+                  While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
+                </p>
+                <p>
+                  Assignment URL: <span className="text-red-700 font-bold">{doc}</span>
+                </p>
+
+                {note && (
+                  <p>
+                    <span className="text-red-700 font-bold">Note:</span> {note}
+                  </p>
+                )}
+              </div>
 
               <div className="my-5">
                 <iframe src={doc} width="100%" height="600"></iframe>
