@@ -101,18 +101,24 @@ const Header = () => {
           </Link>
 
           {/* for Mobile menu start */}
-          <button
-            onClick={() => setMenu(!menu)}
-            data-collapse-toggle="navbar-default"
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm z-30 text-gray-500 rounded-lg lg:hidden hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded="false"
-          >
-            <span className="sr-only">Open main menu</span>
-            <CiMenuBurger className="text-2xl font-bold text-white" />
-          </button>
-
+          <div className="flex items-center gap-3">
+            {user && (
+              <div onClick={() => setProfile(!profile)} className="w-10 h-10 rounded-full lg:hidden">
+                <img src={user?.photoURL || fakeuser} alt="" className="w-full h-full rounded-full" />
+              </div>
+            )}
+            <button
+              onClick={() => setMenu(!menu)}
+              data-collapse-toggle="navbar-default"
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm z-30 text-gray-500 rounded-lg lg:hidden hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-default"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <CiMenuBurger className="text-2xl font-bold text-white" />
+            </button>
+          </div>
           <div
             className={`lg:hidden z-50 mt-3 bg-blue-600 bg-opacity-30 border-4 border-blue-600 shadow-2xl py-8 ${
               menu ? "translate-y-2 opacity-100" : "-translate-y-96 opacity-0"
@@ -121,16 +127,14 @@ const Header = () => {
             <ul className="flex flex-col gap-5  items-end">{navLink}</ul>
           </div>
           {/* Mobile menu end */}
-
           {/* Profile start*/}
-
           <ul
             className={`${
               profile ? "translate-y-2 opacity-100" : "-translate-y-60 opacity-0"
             } transition duration-1000 ease-in-out absolute right-[10%] top-16 z-30 bg-blue-500 bg-opacity-50  px-10 py-5 rounded-b-xl flex flex-col gap-5  items-end`}
           >
             <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
-              <button> My Assignment</button>
+              <Link to="/my-assignment"> My Attempted</Link>
             </li>
             <li className="bg-blue-400 px-4 py-2 rounded-md shadow-lg">
               <button
@@ -144,9 +148,7 @@ const Header = () => {
               </button>
             </li>
           </ul>
-
           {/* Profile End */}
-
           <div className="hidden w-full lg:block lg:w-auto" id="navbar-default">
             <ul className="flex items-center font-semibold gap-3">{navLink}</ul>
           </div>
