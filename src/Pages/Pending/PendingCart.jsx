@@ -69,7 +69,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
           disabled={verifyUser === examineeVerify}
           onClick={() => document.getElementById("my_modal_4").showModal()}
           type="button"
-          className="py-2 px-6 bg-blue-400 text-white rounded-lg "
+          className={`py-2 px-6  text-white rounded-lg ${verifyUser === examineeVerify ? "bg-gray-500" : "bg-blue-400"}`}
         >
           Give Mark
         </button>
