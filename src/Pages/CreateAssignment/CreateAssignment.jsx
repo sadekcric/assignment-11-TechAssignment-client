@@ -72,7 +72,7 @@ const CreateAssignment = () => {
           <fieldset className=" bg-blue-100 h-full gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="title" className="text-sm">
+                <label htmlFor="title" className="text-sm text-black">
                   Title<span className="font-bold text-red-600">*</span>
                 </label>
                 <input
@@ -81,12 +81,12 @@ const CreateAssignment = () => {
                   name="title"
                   type="text"
                   placeholder="Title"
-                  className="w-full rounded-md py-2 pl-2 lg:pl-4 focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
+                  className="w-full  rounded-md py-2 pl-2 lg:pl-4 focus:ring focus:ring-opacity-75 dark:text-gray-50 focus:dark:ring-violet-600 dark:border-gray-300"
                 />
               </div>
 
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="marks" className="text-sm">
+                <label htmlFor="marks" className="text-sm text-black">
                   Marks<span className="font-bold text-red-600">*</span>
                 </label>
                 <input
@@ -100,7 +100,7 @@ const CreateAssignment = () => {
               </div>
 
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="level" className="text-sm">
+                <label htmlFor="level" className="text-sm text-black">
                   Difficulty Level<span className="font-bold text-red-600">*</span>
                 </label>
                 <select
@@ -126,7 +126,7 @@ const CreateAssignment = () => {
               </div>
 
               <div className="col-span-full  sm:col-span-3 mt-1">
-                <p className="text-sm">
+                <p className="text-sm text-black">
                   Due Date<span className="font-bold text-red-600">*</span>
                 </p>
 
@@ -141,7 +141,7 @@ const CreateAssignment = () => {
               </div>
 
               <div className="col-span-full ">
-                <label htmlFor="thumbnail" className="text-sm">
+                <label htmlFor="thumbnail" className="text-sm text-black">
                   Thumbnail URL<span className="font-bold text-red-600">*</span>
                 </label>
                 <input
@@ -155,7 +155,7 @@ const CreateAssignment = () => {
               </div>
 
               <div className="col-span-full ">
-                <label htmlFor="description" className="text-sm">
+                <label htmlFor="description" className="text-sm text-black">
                   Description<span className="font-bold text-red-600">*</span>
                 </label>
                 <textarea

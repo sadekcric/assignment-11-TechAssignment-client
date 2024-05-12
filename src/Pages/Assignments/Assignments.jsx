@@ -149,7 +149,7 @@ const Assignments = () => {
       </div>
 
       <div className="text-center my-10 ">
-        <button onClick={handlePrev} className="px-4 py-1 mr-3 rounded-md bg-blue-100 font-semibold">
+        <button onClick={handlePrev} className="px-4 py-1 mr-3 rounded-md bg-blue-100 text-black font-semibold">
           Prev
         </button>
         {pages.map((page) => (
@@ -159,16 +159,18 @@ const Assignments = () => {
               setPageNumber(page);
             }}
             key={page}
-            className={`px-4 py-1 mr-3 rounded-md bg-blue-100 font-semibold ${pageNumber === page ? "bg-blue-800 text-white" : ""}`}
+            className={`px-4 text-black py-1 mr-3 rounded-md bg-blue-100 font-semibold ${
+              pageNumber === page ? "bg-blue-800 text-white" : ""
+            }`}
           >
             {page}
           </button>
         ))}
-        <button onClick={handleNext} className="px-4 py-1 mr-3 rounded-md bg-blue-100 font-semibold">
+        <button onClick={handleNext} className="px-4 py-1 mr-3 rounded-md bg-blue-100 text-black font-semibold">
           Next
         </button>
 
-        <select className="px-4 py-1 mr-3 rounded-md bg-blue-100 font-semibold" value={perPageItems} onChange={handlePages}>
+        <select className="px-4 py-1 mr-3 rounded-md text-black bg-blue-100 font-semibold" value={perPageItems} onChange={handlePages}>
           <option value="6">6</option>
           <option value="10">10</option>
         </select>

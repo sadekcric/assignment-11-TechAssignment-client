@@ -42,7 +42,7 @@ const AttemptedCart = ({ attempt, index }) => {
               </div>
 
               <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
-                <p className="font-semibold">{feedBack}</p>
+                <p className="font-semibold text-black">{feedBack}</p>
               </div>
 
               <div className="modal-action">
