@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const AttemptedCart = ({ attempt, index }) => {
-  const { title, status, marks, obtainedMarks, feedBack, examiner } = attempt;
+  const { title, status, marks, obtainedMarks, feedBack, examinerName } = attempt;
 
   return (
     <tr className="font-semibold">
@@ -37,7 +37,7 @@ const AttemptedCart = ({ attempt, index }) => {
                   Assignment Title <span className="text-red-700 font-bold">{title}</span>.
                 </p>
                 <p className="mb-4 pt-2">
-                  Examiner: <span className="text-red-700 font-bold">{examiner}</span>.
+                  Examiner: <span className="text-red-700 font-bold">{examinerName}</span>.
                 </p>
               </div>
 

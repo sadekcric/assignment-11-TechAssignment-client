@@ -18,7 +18,8 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
     const feedBack = form.feedback.value;
     const status = "completed";
     const examiner = verifyUser;
-    const data = { obtainedMarks, feedBack, status, examiner };
+    const examinerName = user.displayName;
+    const data = { obtainedMarks, feedBack, status, examiner, examinerName };
 
     axios
       .put(`https://assignment-server-teal.vercel.app/marked/${_id}`, data, { withCredentials: true })
@@ -37,6 +38,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
         }
       })
       .catch((err) => {
+        setLoading(false);
         return Swal.fire({
           icon: "error",
           title: "Error",

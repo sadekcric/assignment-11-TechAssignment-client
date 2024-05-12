@@ -30,13 +30,14 @@ const ViewDetails = () => {
     const obtainedMarks = null;
     const feedBack = null;
     const examiner = null;
+    const examinerName = null;
     const examinee = {
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
     };
 
-    const file = { doc, note, status, examinee, title, marks, obtainedMarks, feedBack, examiner };
+    const file = { doc, note, status, examinee, title, marks, obtainedMarks, feedBack, examiner, examinerName };
 
     axios
       .post(`https://assignment-server-teal.vercel.app/submitted`, file, { withCredentials: true })
