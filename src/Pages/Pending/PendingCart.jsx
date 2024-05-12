@@ -10,7 +10,6 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
   const { user } = useAuth();
   const verifyUser = user.email;
   const examineeVerify = examinee.email;
-  console.log(verifyUser);
 
   const handleMarked = (e) => {
     setLoading(true);
