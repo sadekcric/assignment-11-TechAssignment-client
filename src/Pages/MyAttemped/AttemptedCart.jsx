@@ -30,7 +30,7 @@ const AttemptedCart = ({ attempt, index, setLoading }) => {
 
         <div>
           <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box w-11/12 max-w-5xl relative">
+            <div className="modal-box">
               <h3 className="font-bold text-lg text-center">Assignment Feedback</h3>
               <p className="pb-4 pt-2">
                 Assignment Title <span className="text-red-700 font-bold">{title}</span>.
