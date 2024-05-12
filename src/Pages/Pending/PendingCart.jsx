@@ -39,8 +39,8 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
       })
       .catch((err) => {
         return Swal.fire({
-          icon: "success",
-          title: "Success",
+          icon: "error",
+          title: "Error",
           text: err.message,
           showConfirmButton: false,
           timer: 3000,

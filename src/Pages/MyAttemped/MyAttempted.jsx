@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import AttemptedCart from "./AttemptedCart";
+import Swal from "sweetalert2";
 
 const MyAttempted = () => {
   const [myAttempt, setMyAttempt] = useState([]);
@@ -20,7 +21,13 @@ const MyAttempted = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err.message);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: err.message,
+          showConfirmButton: false,
+          timer: 3000,
+        });
       });
   }, [userEmail]);
 
