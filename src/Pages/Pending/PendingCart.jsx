@@ -10,6 +10,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
   const { user } = useAuth();
   const verifyUser = user.email;
   const examineeVerify = examinee.email;
+  console.log(verifyUser);
 
   const handleMarked = (e) => {
     setLoading(true);
@@ -17,10 +18,11 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
     const obtainedMarks = form.mark.value;
     const feedBack = form.feedback.value;
     const status = "completed";
-    const data = { obtainedMarks, feedBack, status };
+    const examiner = verifyUser;
+    const data = { obtainedMarks, feedBack, status, examiner };
 
     axios
-      .put(`https://assignment-server-teal.vercel.app/marked/${_id}`, data)
+      .put(`https://assignment-server-teal.vercel.app/marked/${_id}`, data, { withCredentials: true })
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           const remaining = submittedAssignments.filter((item) => item._id !== _id);

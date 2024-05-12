@@ -38,7 +38,7 @@ const ViewDetails = () => {
     const file = { doc, note, status, examinee, title, marks, obtainedMarks, feedBack };
 
     axios
-      .post(`https://assignment-server-teal.vercel.app/submitted`, file)
+      .post(`https://assignment-server-teal.vercel.app/submitted`, file, { withCredentials: true })
       .then((res) => {
         if (res.data) {
           setLoading(false);

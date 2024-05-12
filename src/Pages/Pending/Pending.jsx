@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router-dom";
 import PendingCart from "./PendingCart";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,7 +12,7 @@ const Pending = () => {
 
   useEffect(() => {
     axios
-      .get(`https://assignment-server-teal.vercel.app/pending`)
+      .get(`https://assignment-server-teal.vercel.app/pending`, { withCredentials: true })
       .then((res) => {
         setSubmittedAssignment(res.data);
         setLoading(false);

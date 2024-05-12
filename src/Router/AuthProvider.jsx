@@ -10,6 +10,7 @@ import {
   signOut,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -46,12 +47,26 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+
       setUser(currentUser);
+
+      if (currentUser) {
+        axios.post("https://assignment-server-teal.vercel.app/jwt", loggedUser, { withCredentials: true }).then((res) => {
+          console.log(res.data);
+        });
+      } else {
+        axios
+          .post("https://assignment-server-teal.vercel.app/logout", loggedUser, { withCredentials: true })
+          .then((res) => console.log(res.data));
+      }
+
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   const info = { user, googleLogin, githubLogin, register, login, logout, loading, setLoading };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;

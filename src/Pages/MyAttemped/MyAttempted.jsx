@@ -8,11 +8,10 @@ const MyAttempted = () => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const userEmail = user.email;
-  console.log(user);
 
   useEffect(() => {
     axios
-      .get(`https://assignment-server-teal.vercel.app/pending/${userEmail}`)
+      .get(`https://assignment-server-teal.vercel.app/pending/${userEmail}`, { withCredentials: true })
       .then((res) => {
         if (res.data) {
           setLoading(false);
@@ -20,6 +19,7 @@ const MyAttempted = () => {
         }
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err.message);
       });
   }, [userEmail]);
