@@ -25,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/pending",
-        element: <Pending />,
+        element: (
+          <PrivateRoute>
+            <Pending />
+          </PrivateRoute>
+        ),
         loader: () => fetch(`https://assignment-server-teal.vercel.app/pending`),
       },
 

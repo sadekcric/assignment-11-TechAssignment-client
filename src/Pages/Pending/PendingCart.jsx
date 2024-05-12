@@ -2,11 +2,14 @@ import { ImCancelCircle } from "react-icons/im";
 import fakeProfile from "../../assets/fateuser.png";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useState } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
 
 const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssignments, setLoading }) => {
   const { title, examinee, marks, doc, _id } = assignment;
+  const { user } = useAuth();
+  const verifyUser = user.email;
+  const examineeVerify = examinee.email;
 
   const handleMarked = (e) => {
     setLoading(true);
@@ -63,6 +66,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
       <td>{marks}</td>
       <th>
         <button
+          disabled={verifyUser === examineeVerify}
           onClick={() => document.getElementById("my_modal_4").showModal()}
           type="button"
           className="py-2 px-6 bg-blue-400 text-white rounded-lg "

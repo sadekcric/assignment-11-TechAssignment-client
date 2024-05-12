@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 import { Tooltip } from "react-tooltip";
 import { Link } from "react-router-dom";
+import fakeProfile from "../../assets/fateuser.png";
 
 const Cart = ({ assignment, handleDelete }) => {
   const { publisher, thumbnail, title, marks, level, dueDate, _id } = assignment;
@@ -15,9 +16,9 @@ const Cart = ({ assignment, handleDelete }) => {
     <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg bg-blue-50 border-2 border-blue-900 shadow-md dark:bg-gray-50 dark:text-gray-800">
       <div className="flex items-start justify-between">
         <div className="flex space-x-4">
-          <img alt="" src={publisher?.photo} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
+          <img alt="" src={publisher?.photo || fakeProfile} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-semibold">{publisher.name}</p>
+            <p className="text-sm font-semibold">{publisher?.name}</p>
             <p className="text-sm font-semibold text-red-500">DeadLine: {deadLine} </p>
           </div>
         </div>
