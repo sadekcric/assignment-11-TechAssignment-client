@@ -130,6 +130,7 @@ const Assignments = () => {
           onChange={(e) => {
             setLoading(true);
             setLevel(e.target.value);
+            setPageNumber(0);
           }}
           value={level}
           className="py-3  px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-900 transition font-semibold"
