@@ -87,7 +87,10 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
                   While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
                 </p>
                 <p>
-                  Assignment URL: <span className="text-red-700 font-bold">{doc}</span>
+                  Assignment URL:{" "}
+                  <a href={doc} target="blank" className="text-red-700 font-bold">
+                    {doc}
+                  </a>
                 </p>
 
                 {note && (
