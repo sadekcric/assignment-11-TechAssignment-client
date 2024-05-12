@@ -1,4 +1,4 @@
-import { ImCancelCircle } from "react-icons/im";
+import PropTypes from "prop-types";
 
 const AttemptedCart = ({ attempt, index }) => {
   const { title, status, marks, obtainedMarks, feedBack, examiner } = attempt;
@@ -60,3 +60,8 @@ const AttemptedCart = ({ attempt, index }) => {
 };
 
 export default AttemptedCart;
+
+AttemptedCart.propTypes = {
+  attempt: PropTypes.object,
+  index: PropTypes.number,
+};

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Cart from "./Cart";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Assignments = () => {
   const [data, setData] = useState([]);
