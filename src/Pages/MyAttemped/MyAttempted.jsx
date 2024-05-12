@@ -53,7 +53,7 @@ const MyAttempted = () => {
           <tbody>
             {/* row 1 */}
             {myAttempt.map((attempt, index) => (
-              <AttemptedCart key={attempt._id} attempt={attempt} index={index} setLoading={setLoading} />
+              <AttemptedCart key={attempt._id} attempt={attempt} index={index} />
             ))}
           </tbody>
         </table>

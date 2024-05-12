@@ -1,7 +1,7 @@
 import { ImCancelCircle } from "react-icons/im";
 
-const AttemptedCart = ({ attempt, index, setLoading }) => {
-  const { title, status, marks, obtainedMarks, feedBack, _id } = attempt;
+const AttemptedCart = ({ attempt, index }) => {
+  const { title, status, marks, obtainedMarks, feedBack, examiner } = attempt;
 
   return (
     <tr className="font-semibold">
@@ -32,9 +32,15 @@ const AttemptedCart = ({ attempt, index, setLoading }) => {
           <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
               <h3 className="font-bold text-lg text-center">Assignment Feedback</h3>
-              <p className="pb-4 pt-2">
-                Assignment Title <span className="text-red-700 font-bold">{title}</span>.
-              </p>
+              <div>
+                <p className="mb-2 pt-2">
+                  Assignment Title <span className="text-red-700 font-bold">{title}</span>.
+                </p>
+                <p className="mb-4 pt-2">
+                  Examiner: <span className="text-red-700 font-bold">{examiner}</span>.
+                </p>
+              </div>
+
               <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
                 <p className="font-semibold">{feedBack}</p>
               </div>
