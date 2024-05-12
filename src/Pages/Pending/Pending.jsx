@@ -1,18 +1,27 @@
 import { useLoaderData } from "react-router-dom";
 import PendingCart from "./PendingCart";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Pending = () => {
-  const items = useLoaderData();
+  // const items = useLoaderData();
 
   const [submittedAssignments, setSubmittedAssignment] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // console.log(assignment);
 
   useEffect(() => {
-    setSubmittedAssignment(items);
-  }, [items]);
+    axios
+      .get(`https://assignment-server-teal.vercel.app/pending`)
+      .then((res) => {
+        setSubmittedAssignment(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   if (loading) {
     return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;

@@ -21,7 +21,7 @@ const AttemptedCart = ({ attempt, index, setLoading }) => {
       <th>
         <button
           disabled={status === "pending"}
-          onClick={() => document.getElementById("my_modal_4").showModal()}
+          onClick={() => document.getElementById("my_modal_5").showModal()}
           type="button"
           className={`py-2 px-6  text-white rounded-lg ${status === "pending" ? "bg-gray-500" : "bg-blue-400"}`}
         >
@@ -29,41 +29,20 @@ const AttemptedCart = ({ attempt, index, setLoading }) => {
         </button>
 
         <div>
-          <dialog id="my_modal_4" className="modal ">
+          <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
             <div className="modal-box w-11/12 max-w-5xl relative">
-              <h3 className="font-bold text-lg text-center">Give Mark</h3>
+              <h3 className="font-bold text-lg text-center">Assignment Feedback</h3>
               <p className="pb-4 pt-2">
-                While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
+                Assignment Title <span className="text-red-700 font-bold">{title}</span>.
               </p>
+              <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
+                <p className="font-semibold">{feedBack}</p>
+              </div>
 
-              <div className="my-5">{/* <iframe src={doc} width="100%" height="600"></iframe> */}</div>
-
-              <div className=" p-3">
-                <form /*onSubmit={handleMarked}*/ className="lg:w-4/5 lg:mx-auto" method="dialog">
-                  <div className="mb-5">
-                    <p className="font-semibold">
-                      Assignment Marks<span className="text-red-600 font-bold">*</span>
-                    </p>
-
-                    <input type="number" name="mark" className="py-2 px-4 bg-blue-100 rounded-md w-full" required />
-                  </div>
-
-                  <div className="mb-5">
-                    <p className="font-semibold">
-                      Assignment Feedback<span className="text-red-600 font-bold">*</span>
-                    </p>
-                    <textarea required name="feedback" id="" className="bg-blue-100 w-full  py-2 px-4 rounded-md" rows="4"></textarea>
-                  </div>
-
-                  <div className="text-center">
-                    <input type="submit" value="Submit" className="py-3 text-white font-semibold px-6 bg-blue-500 rounded-md min-w-36" />
-                  </div>
-                </form>
-
-                <form method="dialog" className=" absolute top-5 right-5">
-                  <button className="text-red-500 text-2xl ">
-                    <ImCancelCircle />
-                  </button>
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="px-6 py-4 bg-blue-500 rounded-lg text-white">Close</button>
                 </form>
               </div>
             </div>
