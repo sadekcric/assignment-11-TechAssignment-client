@@ -95,8 +95,8 @@ const ViewDetails = () => {
               </div>
 
               <div className="mt-8">
-                <h3 className="text-lg font-bold text-gray-800">About the {title}</h3>
-                <p className="mt-4 text-lg font-semibold text-gray-800">{description}</p>
+                <h3 className="text-lg font-bold">About the {title}</h3>
+                <p className="mt-4 text-lg font-semibold ">{description}</p>
               </div>
 
               {/* Publisher */}

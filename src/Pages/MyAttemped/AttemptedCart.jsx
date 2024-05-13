@@ -41,7 +41,7 @@ const AttemptedCart = ({ attempt, index }) => {
               Examiner: <span className="text-red-700 font-bold">{examinerName}</span>.
             </p>
 
-            <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
+            <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg  bg-blue-100">
               <p className="font-semibold text-black">{feedBack}</p>
             </div>
           </Modal.Body>

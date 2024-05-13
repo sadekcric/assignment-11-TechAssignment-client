@@ -120,7 +120,13 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
                 <p className="font-semibold">
                   Assignment Feedback<span className="text-red-600 font-bold">*</span>
                 </p>
-                <textarea required name="feedback" id="" className="bg-blue-100 w-full  py-2 px-4 rounded-md" rows="4"></textarea>
+                <textarea
+                  required
+                  name="feedback"
+                  id=""
+                  className="bg-blue-100 text-black w-full  py-2 px-4 rounded-md"
+                  rows="4"
+                ></textarea>
               </div>
 
               <Modal.Footer className="text-center">
