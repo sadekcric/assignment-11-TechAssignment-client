@@ -4,6 +4,7 @@ import Cart from "./Cart";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Assignments = () => {
   const [data, setData] = useState([]);
@@ -116,6 +117,10 @@ const Assignments = () => {
 
   return (
     <div className="mt-10 ">
+      <Helmet>
+        <title>Tech Assignment | Assignments</title>
+      </Helmet>
+
       <div className="mb-10">
         <h1 className="text-center text-3xl lg:text-5xl font-bold">Explore All Assignments</h1>
         <p className="lg:w-2/3 lg:mx-auto text-center font-semibold mt-3">

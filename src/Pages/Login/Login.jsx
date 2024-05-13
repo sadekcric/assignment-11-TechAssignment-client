@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "./../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { FaGithub } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { googleLogin, githubLogin, login, loading, setLoading } = useAuth();
@@ -88,6 +89,10 @@ const Login = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Tech Assignment | Login</title>
+      </Helmet>
+
       <div className="font-[sans-serif] text-[#333]">
         <div className="min-h-screen flex flex-col items-center justify-center">
           <div className="flex flex-col-reverse md:flex-row  items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">

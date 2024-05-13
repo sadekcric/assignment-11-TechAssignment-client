@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import AttemptedCart from "./AttemptedCart";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyAttempted = () => {
   const [myAttempt, setMyAttempt] = useState([]);
@@ -37,6 +38,10 @@ const MyAttempted = () => {
 
   return (
     <div className="container mx-auto p-3">
+      <Helmet>
+        <title>Tech Assignment | My Attempt</title>
+      </Helmet>
+
       <div className="overflow-x-auto ">
         <table className="table ">
           {/* head */}

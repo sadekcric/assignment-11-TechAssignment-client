@@ -47,7 +47,6 @@ const AttemptedCart = ({ attempt, index }) => {
 
               <div className="modal-action">
                 <form method="dialog">
-                  {/* if there is a button in form, it will close the modal */}
                   <button className="px-6 py-4 bg-blue-500 rounded-lg text-white">Close</button>
                 </form>
               </div>

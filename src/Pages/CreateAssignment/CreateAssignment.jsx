@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAuth from "./../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import moment from "moment";
+import { Helmet } from "react-helmet-async";
 
 const CreateAssignment = () => {
   const date = moment()._d;
@@ -60,6 +61,10 @@ const CreateAssignment = () => {
 
   return (
     <div className="container mx-auto p-3 font-semibold min-h-[calc(100vh-337px)] lg:flex lg:flex-col lg:items-center lg:justify-center my-10 ">
+      <Helmet>
+        <title>Tech Assignment | Create Assignment</title>
+      </Helmet>
+
       <div className="mb-10">
         <h2 className="text-center text-3xl lg:text-5xl font-bold">Create Your Assignment</h2>
       </div>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const [visible1, setVisible1] = useState(false);
@@ -100,6 +101,10 @@ const Register = () => {
   };
   return (
     <div className="container mx-auto mt-5 font-semibold">
+      <Helmet>
+        <title>Tech Assignment | Register</title>
+      </Helmet>
+
       <div className="font-[sans-serif] bg-white text-white md:min-h-screen ">
         <div className="flex flex-col-reverse p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md md:flex-row items-center  gap-8 h-full">
           <div className="max-md:order-1 p-4 bg-blue-500 rounded-lg">

@@ -5,6 +5,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ViewDetails = () => {
   const details = useLoaderData();
@@ -69,6 +70,10 @@ const ViewDetails = () => {
 
   return (
     <div className="container mx-auto p-3">
+      <Helmet>
+        <title>Tech Assignment | Details</title>
+      </Helmet>
+
       <div className="font-sans">
         <div className="py-10 lg:py-24">
           <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">

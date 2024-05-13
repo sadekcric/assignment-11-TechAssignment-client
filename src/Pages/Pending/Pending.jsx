@@ -1,6 +1,7 @@
 import PendingCart from "./PendingCart";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const Pending = () => {
   // const items = useLoaderData();
@@ -28,6 +29,10 @@ const Pending = () => {
 
   return (
     <div className="container mx-auto p-3">
+      <Helmet>
+        <title>Tech Assignment | Pending Assignment</title>
+      </Helmet>
+
       <div className="overflow-x-auto ">
         <table className="table ">
           {/* head */}
