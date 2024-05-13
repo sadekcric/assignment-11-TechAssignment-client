@@ -28,6 +28,7 @@ const Header = () => {
 
   const navLink = (
     <>
+      {/* Home */}
       <li>
         <NavLink
           to="/"
@@ -39,6 +40,7 @@ const Header = () => {
         </NavLink>
       </li>
 
+      {/* Assignments */}
       <li>
         <NavLink
           to="/assignments"
@@ -50,6 +52,7 @@ const Header = () => {
         </NavLink>
       </li>
 
+      {/* Pending Assignments */}
       <li>
         <NavLink
           to="/pending"
@@ -63,6 +66,7 @@ const Header = () => {
 
       {user ? (
         <>
+          {/* Create Assignments */}
           <li>
             <NavLink
               to="/create"
@@ -74,12 +78,14 @@ const Header = () => {
             </NavLink>
           </li>
 
+          {/* Profile for dextop */}
           <li onClick={() => setProfile(!profile)} className="w-12 h-12 rounded-full hidden lg:flex">
             <img src={user?.photoURL || fakeuser} alt="" className="w-full h-full rounded-full" />
           </li>
         </>
       ) : (
         <>
+          {/* Login */}
           <li>
             <NavLink
               to="/login"
@@ -91,6 +97,7 @@ const Header = () => {
             </NavLink>
           </li>
 
+          {/* Register */}
           <li>
             <NavLink
               to="/register"
@@ -104,10 +111,10 @@ const Header = () => {
         </>
       )}
 
+      {/* Dark light Btn */}
       <li>
-        <label className="swap swap-rotate hidden lg:flex lg:items-center">
-          {/* this hidden checkbox controls the state */}
-          <input onChange={handleToggle} type="checkbox" className="theme-controller" value={theme} />
+        <label className="swap swap-rotate hidden lg:flex lg:items-center ">
+          <input type="checkbox" value={theme} className="opacity-0" onChange={handleToggle} />
 
           {theme === "light" ? (
             <svg className=" goldenText fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
 
 const AttemptedCart = ({ attempt, index }) => {
-  const { title, status, marks, obtainedMarks, feedBack, examinerName } = attempt;
+  const [openModal, setOpenModal] = useState(false);
+  // const [data, setData] = useState({});
+
+  // const {  } = data;
+  const { obtainedMarks, title, status, marks, feedBack, examinerName } = attempt;
 
   return (
     <tr className="font-semibold">
@@ -19,40 +25,32 @@ const AttemptedCart = ({ attempt, index }) => {
       <td>{marks}</td>
       <td>{obtainedMarks || "No Published"}</td>
       <th>
-        <button
+        <Button
           disabled={status === "pending"}
-          onClick={() => document.getElementById("my_modal_5").showModal()}
-          type="button"
+          onClick={() => setOpenModal(true)}
           className={`py-2 px-6  text-white rounded-lg ${status === "pending" ? "bg-gray-500" : "bg-blue-400"}`}
         >
           Feedback
-        </button>
+        </Button>
 
-        <div>
-          <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg text-center">Assignment Feedback</h3>
-              <div>
-                <p className="mb-2 pt-2">
-                  Assignment Title <span className="text-red-700 font-bold">{title}</span>.
-                </p>
-                <p className="mb-4 pt-2">
-                  Examiner: <span className="text-red-700 font-bold">{examinerName}</span>.
-                </p>
-              </div>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Assignment Feedback</Modal.Header>
 
-              <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
-                <p className="font-semibold text-black">{feedBack}</p>
-              </div>
+          <Modal.Body>
+            <p className="mb-4 pt-2">
+              Examiner: <span className="text-red-700 font-bold">{examinerName}</span>.
+            </p>
 
-              <div className="modal-action">
-                <form method="dialog">
-                  <button className="px-6 py-4 bg-blue-500 rounded-lg text-white">Close</button>
-                </form>
-              </div>
+            <div className="w-4/5 mt-5 mx-auto p-3 border-2 border-blue-600 rounded-lg bg-blue-100">
+              <p className="font-semibold text-black">{feedBack}</p>
             </div>
-          </dialog>
-        </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setOpenModal(false)} className="bg-blue-500">
+              Back
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </th>
     </tr>
   );

@@ -1,11 +1,13 @@
-import { ImCancelCircle } from "react-icons/im";
 import fakeProfile from "../../assets/fateuser.png";
 import PropTypes from "prop-types";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
 
 const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssignments, setLoading }) => {
+  const [openModal, setOpenModal] = useState(false);
   const { title, examinee, marks, doc, _id, note } = assignment;
   const { user } = useAuth();
   const verifyUser = user.email;
@@ -23,8 +25,10 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
 
     axios
       .put(`https://assignment-server-teal.vercel.app/marked/${_id}`, data, { withCredentials: true })
+
       .then((res) => {
         if (res.data.modifiedCount > 0) {
+          setOpenModal(false);
           const remaining = submittedAssignments.filter((item) => item._id !== _id);
           setSubmittedAssignment(remaining);
           setLoading(false);
@@ -37,6 +41,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
           });
         }
       })
+
       .catch((err) => {
         setLoading(false);
         return Swal.fire({
@@ -68,73 +73,62 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
       <td>{title}</td>
       <td>{marks}</td>
       <th>
-        <button
+        <Button
           disabled={verifyUser === examineeVerify}
-          onClick={() => document.getElementById("my_modal_4").showModal()}
-          type="button"
+          onClick={() => setOpenModal(true)}
           className={`py-2 px-6  text-white rounded-lg ${verifyUser === examineeVerify ? "bg-gray-500" : "bg-blue-400"}`}
         >
           Give Mark
-        </button>
+        </Button>
 
-        <div>
-          <dialog id="my_modal_4" className="modal ">
-            <div className="modal-box w-11/12 max-w-5xl relative">
-              <h3 className="font-bold text-lg text-center">Give Mark</h3>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header className="text-center">Give Mark</Modal.Header>
 
-              <div className="pb-4 pt-2 space-y-2">
+          <Modal.Body>
+            <div className="pb-4 pt-2 space-y-2">
+              <p>
+                While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
+              </p>
+              <p>
+                Assignment URL:{" "}
+                <a href={doc} target="blank" className="text-red-700 font-bold">
+                  {doc}
+                </a>
+              </p>
+
+              {note && (
                 <p>
-                  While marking assignments <span className="text-red-700 font-bold">Feedback</span> Feedback must be Provide.
+                  <span className="text-red-700 font-bold">Note:</span> {note}
                 </p>
-                <p>
-                  Assignment URL:{" "}
-                  <a href={doc} target="blank" className="text-red-700 font-bold">
-                    {doc}
-                  </a>
-                </p>
-
-                {note && (
-                  <p>
-                    <span className="text-red-700 font-bold">Note:</span> {note}
-                  </p>
-                )}
-              </div>
-
-              <div className="my-5">
-                <iframe src={doc} width="100%" height="600"></iframe>
-              </div>
-
-              <div className=" p-3">
-                <form onSubmit={handleMarked} className="lg:w-4/5 lg:mx-auto" method="dialog">
-                  <div className="mb-5">
-                    <p className="font-semibold">
-                      Assignment Marks<span className="text-red-600 font-bold">*</span>
-                    </p>
-
-                    <input type="number" name="mark" className="py-2 px-4 bg-blue-100 rounded-md w-full" required />
-                  </div>
-
-                  <div className="mb-5">
-                    <p className="font-semibold">
-                      Assignment Feedback<span className="text-red-600 font-bold">*</span>
-                    </p>
-                    <textarea required name="feedback" id="" className="bg-blue-100 w-full  py-2 px-4 rounded-md" rows="4"></textarea>
-                  </div>
-
-                  <div className="text-center">
-                    <input type="submit" value="Submit" className="py-3 text-white font-semibold px-6 bg-blue-500 rounded-md min-w-36" />
-                  </div>
-                </form>
-
-                <form method="dialog" className=" absolute top-5 right-5">
-                  <button className="text-red-500 text-2xl ">
-                    <ImCancelCircle />
-                  </button>
-                </form>
-              </div>
+              )}
             </div>
-          </dialog>
-        </div>
+
+            <div className="my-5">
+              <iframe src={doc} width="100%" height="600"></iframe>
+            </div>
+
+            <form onSubmit={handleMarked} className="lg:w-4/5 lg:mx-auto" method="dialog">
+              <div className="mb-5">
+                <p className="font-semibold">
+                  Assignment Marks<span className="text-red-600 font-bold">*</span>
+                </p>
+
+                <input type="number" name="mark" className="py-2 px-4 bg-blue-100 rounded-md w-full" required />
+              </div>
+
+              <div className="mb-5">
+                <p className="font-semibold">
+                  Assignment Feedback<span className="text-red-600 font-bold">*</span>
+                </p>
+                <textarea required name="feedback" id="" className="bg-blue-100 w-full  py-2 px-4 rounded-md" rows="4"></textarea>
+              </div>
+
+              <Modal.Footer className="text-center">
+                <input type="submit" value="Submit" className="py-3 text-white font-semibold px-6 bg-blue-500 rounded-md min-w-36" />
+              </Modal.Footer>
+            </form>
+          </Modal.Body>
+        </Modal>
       </th>
     </tr>
   );
