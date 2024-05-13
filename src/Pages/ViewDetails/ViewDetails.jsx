@@ -82,7 +82,7 @@ const ViewDetails = () => {
             </div>
 
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-extrabold text-gray-800">{title}</h2>
+              <h2 className="text-2xl font-extrabold ">{title}</h2>
               <div className="">
                 <p className=" text-xl font-bold text-red-500"> {deadLine} Days Left</p>
               </div>
