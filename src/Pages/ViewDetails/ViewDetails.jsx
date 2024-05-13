@@ -140,7 +140,7 @@ const ViewDetails = () => {
 
                         <div className="mb-5">
                           <p className="font-semibold">Quick Note</p>
-                          <textarea name="note" id="" className="bg-blue-100 w-full py-2 px-4 rounded-md"></textarea>
+                          <textarea name="note" id="" className="bg-blue-100 text-black w-full py-2 px-4 rounded-md"></textarea>
                         </div>
 
                         <div className="text-center">
