@@ -81,7 +81,7 @@ const PendingCart = ({ assignment, index, setSubmittedAssignment, submittedAssig
           Give Mark
         </Button>
 
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal className="text-black font-semibold" show={openModal} onClose={() => setOpenModal(false)}>
           <Modal.Header className="text-center">Give Mark</Modal.Header>
 
           <Modal.Body>

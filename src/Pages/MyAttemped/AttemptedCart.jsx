@@ -34,7 +34,7 @@ const AttemptedCart = ({ attempt, index }) => {
         </Button>
 
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>Assignment Feedback</Modal.Header>
+          <Modal.Header className="text-black font-semibold">Assignment Feedback</Modal.Header>
 
           <Modal.Body>
             <p className="mb-4 pt-2">

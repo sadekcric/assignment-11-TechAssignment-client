@@ -120,7 +120,7 @@ const ViewDetails = () => {
                   Take assignment
                 </button>
 
-                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle font-semibold">
                   <div className="modal-box relative">
                     <h3 className="font-bold text-lg text-center">Submit Form</h3>
                     <p className="pb-4 pt-2">
