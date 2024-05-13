@@ -13,7 +13,7 @@ const Cart = ({ assignment, handleDelete }) => {
   const deadLine = date.format("Do MMMM YYYY");
 
   return (
-    <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg bg-blue-50 border-2 border-blue-900 shadow-md dark:bg-gray-50 dark:text-gray-800">
+    <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden text-black rounded-lg bg-blue-50 border-2 border-blue-900 shadow-md dark:bg-gray-50 dark:text-gray-800">
       <div className="flex items-start justify-between">
         <div className="flex space-x-4">
           <img alt="" src={publisher?.photo || fakeProfile} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
