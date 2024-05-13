@@ -73,7 +73,7 @@ const CreateAssignment = () => {
         <div className="flex-1 h-full ">
           <img src={create} alt="" className="w-full lg:h-[436px] rounded-lg" />
         </div>
-        <form onSubmit={handleCreateAssignment} className="flex-1 h-full">
+        <form onSubmit={handleCreateAssignment} className="flex-1 h-full text-black">
           <fieldset className=" bg-blue-100 h-full gap-6 p-6 rounded-md shadow-sm dark:bg-gray-50">
             <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
               <div className="col-span-full sm:col-span-3">
