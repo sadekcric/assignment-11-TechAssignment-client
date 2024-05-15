@@ -33,7 +33,7 @@ const CreateAssignment = () => {
     const assignment = { title, marks, dueDate, level, thumbnail, publisher, description };
 
     axios
-      .post(`https://assignment-server-teal.vercel.app/assignments`, assignment)
+      .post(`https://assignment-server-teal.vercel.app/assignments`, assignment, { withCredentials: true })
       .then((res) => {
         if (res.data.acknowledged) {
           setLoading(false);
