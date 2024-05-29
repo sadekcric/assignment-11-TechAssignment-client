@@ -16,6 +16,7 @@ const Assignments = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   const pages = [...Array(totalPages).keys()];
 
@@ -23,6 +24,14 @@ const Assignments = () => {
     const pagesInt = parseInt(e.target.value);
     setPerPageItems(pagesInt);
     setPageNumber(0);
+  };
+
+  // for search field
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const result = e.target.search.value;
+    setSearch(result);
+    e.target.reset();
   };
 
   const handlePrev = () => {
@@ -104,12 +113,12 @@ const Assignments = () => {
 
   useEffect(() => {
     axios
-      .get(`https://assignment-server-teal.vercel.app/assignments?pages=${pageNumber}&size=${perPageItems}&level=${level}`)
+      .get(`https://assignment-server-teal.vercel.app/assignments?pages=${pageNumber}&size=${perPageItems}&level=${level}&search=${search}`)
       .then((res) => {
         setData(res.data);
         setLoading(false);
       });
-  }, [pageNumber, perPageItems, level]);
+  }, [pageNumber, perPageItems, level, search]);
 
   if (loading) {
     return <div className="rounded-md top-[50%] left-[50%]  h-12 w-12 border-4 border-t-4 border-blue-500 animate-spin absolute"></div>;
@@ -130,7 +139,7 @@ const Assignments = () => {
         </p>
       </div>
 
-      <div className="text-center mb-10">
+      <div className="text-center mb-10 flex flex-col md:flex-row gap-5 items-center justify-center">
         <select
           onChange={(e) => {
             setLoading(true);
@@ -145,6 +154,15 @@ const Assignments = () => {
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
+
+        <form onSubmit={handleSearch}>
+          <input type="text" name="search" placeholder="Title Name" id="" className={`py-3 px-6 rounded-l-md ${search && "hidden"}`} />
+          {search ? (
+            <input type="submit" value="Go Back" className="py-[13px] text-white px-8 rounded-md bg-blue-500" />
+          ) : (
+            <input type="submit" value="Search" className="py-[13px] text-white px-6 rounded-r-md bg-blue-500" />
+          )}
+        </form>
       </div>
 
       <div className={`grid grid-cols-1 transition duration-1000 ease-in-out md:grid-cols-2 lg:grid-cols-3 container mx-auto p-3 gap-5`}>

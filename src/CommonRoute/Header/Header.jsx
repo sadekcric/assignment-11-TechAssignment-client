@@ -12,8 +12,10 @@ const Header = () => {
 
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
 
-  const handleToggle = (e) => {
-    if (e.target.checked) {
+  console.log(theme);
+
+  const handleToggle = () => {
+    if (theme === "light") {
       setTheme("synthwave");
     } else {
       setTheme("light");
@@ -113,8 +115,17 @@ const Header = () => {
 
       {/* Dark light Btn */}
       <li>
-        <label className="swap swap-rotate hidden lg:flex lg:items-center ">
-          <input type="checkbox" value={theme} className="opacity-0" onChange={handleToggle} />
+        <label
+          className="swap swap-rotate hidden lg:flex lg:items-center 
+        
+        
+        "
+        >
+          {theme === "light" ? (
+            <input type="checkbox" value={theme} className="opacity-0" onChange={handleToggle} />
+          ) : (
+            <input type="checkbox" value={theme} className="opacity-0" onChange={handleToggle} checked={true} />
+          )}
 
           {theme === "light" ? (
             <svg className=" goldenText fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
