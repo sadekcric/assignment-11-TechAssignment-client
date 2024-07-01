@@ -22,7 +22,9 @@ Tech Assignment is a web application designed for managing assignments and facil
 - Daisy UI
 
 ## Run Steps:
-- **1. **
+1. **git clone https://github.com/sadekcric/assignment-11-TechAssignment-client.git**
+2. **cd folder-name**
+3. **npm install**
 
 
 
